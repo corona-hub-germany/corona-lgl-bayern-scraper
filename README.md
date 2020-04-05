@@ -10,6 +10,11 @@ You can depoy a serverless function:
 serverless deploy
 ```
 
+You'll need to set a few environment-variables to recieve error messages from the telegram corona-serverless-error-bot:
+
+* TELEGRAM_BOT_TOKEN
+* TELEGRAM_CHAT_ID
+
 Here is an example endpoint you can use:
 
 https://9gqwiyjoha.execute-api.eu-central-1.amazonaws.com/dev/getCoronaDataBaveria

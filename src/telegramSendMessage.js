@@ -5,6 +5,11 @@ require('dotenv').config();
 
 module.exports = function telegramSendMessage(msg, icon = 'error') {
 	try {
+		if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+			console.warn(`Telegram variables are not defined.`);
+			return null;
+		}
+
 		const notifier = new SystemNotifier({
 			prefix: 'corona-lgl-bayern-scraper',
 			telegram: {
