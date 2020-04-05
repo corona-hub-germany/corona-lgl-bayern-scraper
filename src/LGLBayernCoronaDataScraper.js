@@ -40,15 +40,23 @@ module.exports = class LGLBayernCoronaDataScraper {
 		if (this.options.useFileCache && fs.existsSync(CACHE_FILE)) {
 			htmlContent = await fs.readFile(CACHE_FILE);
 		} else {
-			var response = await axios.get(this.options.url, {});
-			htmlContent = response.data;
+			try {
+				var response = await axios.get(this.options.url, {});
+				htmlContent = response.data;
+			} catch(err) {
+				throw new Error(`Error requesting remote url "${this.options.url}": ${err}`);
+			}
 
 			if (this.options.useFileCache) {
 				await fs.writeFile(CACHE_FILE, htmlContent);
 			}
 		}
 
-		this.$ = cheerio.load(htmlContent);
+		try {
+			this.$ = cheerio.load(htmlContent);
+		} catch(err) {
+			throw new Error(`Error parsing html content with cheerio: ${err}`);
+		}
 	}
 
 	getSourceUrl() {
@@ -106,23 +114,33 @@ module.exports = class LGLBayernCoronaDataScraper {
 	*/
 	getTableEntries() {
 		const $rows = this.$('#content_1c > div.abstand_unten > div > table > tbody > tr');
-		//TODO check if sum
+
+		const rowCount = $rows.length;
+		if (rowCount < 95) {
+			throw new Error(`Invalid row count "${rowCount}" expected ">= 95"`);
+		}
 
 		var data = []
 		$rows.each((index, element) => {
-			const $tds = this.$(element).find('td');
+			const tds = this.$(element).find('td');
 
-			const name = this.$($tds[0]).text();
-			const infected = this.$($tds[1]).text();
-			const infected_new = this.$($tds[2]).text();
-			const infected_100k = this.$($tds[3]).text();
-			const infected_indicator_100k = this.$($tds[4]).text();
-			const deaths = this.$($tds[5]).text();
-			const deaths_new = this.$($tds[6]).text();
+			const name = this.$(tds[0]).text();
 
 			if (name === 'Gesamtergebnis' || name === '') {
 				return;
 			}
+
+			const columnCount = tds.length;
+			if (columnCount !== 7) {
+				throw new Error(`Invalid column count "${columnCount}" expected "7"`);
+			}
+
+			const infected = this.$(tds[1]).text();
+			const infected_new = this.$(tds[2]).text();
+			const infected_100k = this.$(tds[3]).text();
+			const infected_indicator_100k = this.$(tds[4]).text();
+			const deaths = this.$(tds[5]).text();
+			const deaths_new = this.$(tds[6]).text();
 
 			const entry = {
 				name,

@@ -1,8 +1,8 @@
 {
   "name": "corona-lgl-bayern-scraper",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Scrape corona case-data from lgl.bayern.de",
-  "main": "src/LGLBayernCoronaDataScraper.js.js",
+  "main": "src/LGLBayernCoronaDataScraper.js",
   "scripts": {
     "start": "serverless offline"
   },
@@ -28,6 +28,8 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
-    "serverless-offline": "^6.1.4"
+    "dotenv": "^8.2.0",
+    "serverless-offline": "^6.1.4",
+    "system-notifier": "^1.0.1"
   }
 }

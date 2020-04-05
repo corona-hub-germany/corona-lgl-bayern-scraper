@@ -1,8 +1,9 @@
 'use strict';
 
 const LGLBayernCoronaDataScraper = require('./src/LGLBayernCoronaDataScraper');
+const telegramSendMessage = require('./src/telegramSendMessage');
 
-module.exports.getCoronaDataBaveria = async event => {
+module.exports.getCoronaDataBaveria = async (event, context, callback) => {
 	try {
 		const scraper = new LGLBayernCoronaDataScraper();
 
@@ -26,9 +27,10 @@ module.exports.getCoronaDataBaveria = async event => {
 		};
 
 	} catch (err) {
+		telegramSendMessage(`Error in getCoronaDataBaveria : ${err}`);
 		return {
 			statusCode: 500,
-			body: JSON.stringify(err),
+			body: JSON.stringify(err)
 		};
 	}
 };
