@@ -1,8 +1,20 @@
 # corona-lgl-bayern-scraper
 
-Scrape corona case-data from lgl.bayern (germany)
+Scrape corona case-data from the [lgl.bayern.de website](https://www.lgl.bayern.de/gesundheit/infektionsschutz/infektionskrankheiten_a_z/coronavirus/karte_coronavirus/index.htm)
 
-## Example
+## Serverless
+
+You can depoy a serverless function:
+
+```sh
+serverless deploy
+```
+
+Here is an example endpoint you can use:
+
+https://9gqwiyjoha.execute-api.eu-central-1.amazonaws.com/dev/getCoronaDataBaveria
+
+## API Example
 
 ```js
 const LGLBayernCoronaDataScraper = require('corona-lgl-bayern-scraper');

@@ -1,0 +1,24 @@
+service: corona-lgl-bayern-scraper
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-central-1
+
+package:
+  include:
+    - src/**
+  exclude:
+    - .cache.html
+
+functions:
+  getCoronaDataBaveria:
+    handler: handler.getCoronaDataBaveria
+    events:
+      - http:
+          path: getCoronaDataBaveria
+          method: get

@@ -1,17 +1,19 @@
 {
   "name": "corona-lgl-bayern-scraper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Scrape corona case-data from lgl.bayern.de",
   "main": "src/LGLBayernCoronaDataScraper.js.js",
   "scripts": {
-    "start": "node handler.js"
+    "start": "serverless offline"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mojoaxel/corona-lgl-bayern-scraper.git"
   },
   "keywords": [
-    "corona", "bavaria", "germany"
+    "corona",
+    "bavaria",
+    "germany"
   ],
   "author": "Alexander Wunschik <dev@wunschik.net>",
   "license": "AGPL-3.0-or-later",
@@ -24,5 +26,8 @@
     "cheerio": "^1.0.0-rc.3",
     "fs-extra": "^9.0.0",
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^6.1.4"
   }
 }

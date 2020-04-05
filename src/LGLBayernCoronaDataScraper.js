@@ -7,7 +7,8 @@ module.exports = class LGLBayernCoronaDataScraper {
 
 	constructor(options) {
 		this.options = Object.assign({
-			url: 'https://www.lgl.bayern.de/gesundheit/infektionsschutz/infektionskrankheiten_a_z/coronavirus/karte_coronavirus/index.htm'
+			url: 'https://www.lgl.bayern.de/gesundheit/infektionsschutz/infektionskrankheiten_a_z/coronavirus/karte_coronavirus/index.htm',
+			useFileCache: false
 		}, options );
 	}
 
@@ -36,12 +37,15 @@ module.exports = class LGLBayernCoronaDataScraper {
 		const CACHE_FILE = './.cache.html';
 
 		var htmlContent = '';
-		if (fs.existsSync(CACHE_FILE)) {
+		if (this.options.useFileCache && fs.existsSync(CACHE_FILE)) {
 			htmlContent = await fs.readFile(CACHE_FILE);
 		} else {
 			var response = await axios.get(this.options.url, {});
 			htmlContent = response.data;
-			await fs.writeFile(CACHE_FILE, htmlContent);
+
+			if (this.options.useFileCache) {
+				await fs.writeFile(CACHE_FILE, htmlContent);
+			}
 		}
 
 		this.$ = cheerio.load(htmlContent);
