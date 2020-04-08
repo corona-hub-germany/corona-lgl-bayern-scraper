@@ -26,6 +26,7 @@
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.0.0",
+    "landkreise-deutschland": "^3.0.0",
     "moment": "^2.24.0",
     "system-notifier": "^1.0.1"
   },

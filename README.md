@@ -44,20 +44,30 @@ console.log(returnJson);
 
 Output:
 ```js
-{
-	srcUrl: 'https://www.lgl.bayern.de/gesundheit/infektionsschutz/infektionskrankheiten_a_z/coronavirus/karte_coronavirus/index.htm',
-	copyright: '© Bayerisches Landesamt für Gesundheit und Lebensmittelsicherheit 2020',
-	lastUpdate: '2020-04-04T08:00:00.000Z',
-	data: [
-		{
-			name: 'Aichach-Friedberg',
-			infected: 164,
-			infected_new: 10,
-			infected_100k: 122.76,
-			infected_indicator_100k: 50.9,
-			deaths: 3,
-			deaths_new: 0
-		}
+"srcUrl": "https://www.lgl.bayern.de/gesundheit/infektionsschutz/infektionskrankheiten_a_z/coronavirus/karte_coronavirus/index.htm",
+  "copyright": [
+    "© Bayerisches Landesamt für Gesundheit und Lebensmittelsicherheit 2020",
+    "© Statistisches Bundesamt (Destatis)"
+  ],
+  "lastUpdate": "2020-04-07T08:00:00.000Z",
+  "data": [
+    {
+      "name_org": "Aichach-Friedberg",
+      "name": "Aichach-Friedberg",
+      "type": "Landkreis",
+      "ags": "09771",
+      "area_km2": 780.23,
+      "population": 133596,
+      "population_male": 66651,
+      "population_female": 66945,
+      "population_per_km2": 171,
+      "infected": 189,
+      "infected_new": 15,
+      "infected_100k": 141.47,
+      "infected_indicator_100k": 51.65,
+      "deaths": 5,
+      "deaths_new": 0
+    },
 		...
 	]
 }
